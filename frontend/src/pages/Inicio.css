@@ -1,0 +1,66 @@
+/* ============================================================
+   Archivo: frontend/src/pages/Inicio.css
+   ============================================================ */
+
+.pagina-inicio {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.inicio__main {
+  flex: 1;
+  padding: 32px 0 48px;
+}
+
+/* Título de la sección de fecha */
+.inicio__seccion-titulo {
+  margin-bottom: 24px;
+}
+
+.inicio__titulo-fecha {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-texto-suave);
+  letter-spacing: -0.2px;
+}
+
+/* Farmacias */
+.inicio__farmacias {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estado vacío / error */
+.inicio__estado {
+  background: var(--color-fondo-card);
+  border-radius: var(--radio-medio);
+  padding: 48px 28px;
+  text-align: center;
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--sombra-suave);
+}
+
+.inicio__estado-icono {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.inicio__estado-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-texto);
+  margin-bottom: 10px;
+}
+
+.inicio__estado-mensaje {
+  font-size: 16px;
+  color: var(--color-texto-suave);
+  margin-bottom: 8px;
+}
+
+.inicio__estado-ayuda {
+  font-size: 14px;
+  color: var(--color-texto-claro);
+}

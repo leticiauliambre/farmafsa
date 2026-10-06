@@ -1,0 +1,62 @@
+/* ============================================================
+   Archivo: frontend/src/components/Footer.css
+   ============================================================ */
+
+.footer {
+  background: var(--color-fondo-dark);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 28px 0;
+  margin-top: auto;
+}
+
+.footer__contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer__fuente {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer__fuente-icono {
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.footer__fuente-texto {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 3px;
+}
+
+.footer__fuente-link {
+  font-size: 13px;
+  color: var(--color-secundario);
+  text-decoration: none;
+  transition: var(--transicion);
+}
+
+.footer__fuente-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer__derechos {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 600px) {
+  .footer__contenido {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

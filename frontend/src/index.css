@@ -1,0 +1,304 @@
+/* ============================================================
+   Archivo: frontend/src/index.css
+   Descripción: Estilos globales y variables de diseño
+   
+   Se usan variables CSS (--variable) para mantener los colores
+   y valores consistentes en toda la aplicación.
+   ============================================================ */
+
+/* Importar tipografía moderna desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================================
+   VARIABLES DE DISEÑO (colores, tamaños, sombras)
+   ============================================================ */
+:root {
+  /* Colores principales - Verde farmacia/salud */
+  --color-primario:      #1a7a4a;
+  --color-primario-dark: #145e38;
+  --color-primario-light: #e8f5ee;
+  --color-secundario:    #2ea865;
+  --color-acento:        #f0a500;
+
+  /* Fondos */
+  --color-fondo:         #f2f7f4;
+  --color-fondo-card:    #ffffff;
+  --color-fondo-dark:    #0f2419;
+
+  /* Textos */
+  --color-texto:         #1a2e22;
+  --color-texto-suave:   #5a7263;
+  --color-texto-claro:   #8fa896;
+
+  /* Bordes y separadores */
+  --color-borde:         #d4e8da;
+
+  /* Sombras */
+  --sombra-suave:  0 2px 12px rgba(26, 122, 74, 0.08);
+  --sombra-media:  0 4px 24px rgba(26, 122, 74, 0.15);
+  --sombra-fuerte: 0 8px 40px rgba(26, 122, 74, 0.2);
+
+  /* Bordes redondeados */
+  --radio-pequeño: 8px;
+  --radio-medio:   16px;
+  --radio-grande:  24px;
+
+  /* Transiciones */
+  --transicion: all 0.25s ease;
+}
+
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============================================================
+   COMPONENTES REUTILIZABLES
+   ============================================================ */
+
+/* Contenedor principal */
+.contenedor {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Botón primario (verde) */
+.btn-primario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-primario);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radio-pequeño);
+  font-size: 15px;
+  font-weight: 600;
+  transition: var(--transicion);
+  border: 2px solid transparent;
+}
+
+.btn-primario:hover {
+  background: var(--color-primario-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--sombra-media);
+}
+
+.btn-primario:active {
+  transform: translateY(0);
+}
+
+/* Botón secundario (contorno) */
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--color-primario);
+  padding: 12px 24px;
+  border-radius: var(--radio-pequeño);
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid var(--color-primario);
+  transition: var(--transicion);
+}
+
+.btn-secundario:hover {
+  background: var(--color-primario-light);
+  transform: translateY(-1px);
+}
+
+/* Botón de peligro (rojo) */
+.btn-peligro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radio-pequeño);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--transicion);
+}
+
+.btn-peligro:hover {
+  background: #b91c1c;
+}
+
+/* Botón de editar (azul) */
+.btn-editar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radio-pequeño);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--transicion);
+}
+
+.btn-editar:hover {
+  background: #1d4ed8;
+}
+
+/* Campo de formulario */
+.campo-form {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--color-borde);
+  border-radius: var(--radio-pequeño);
+  font-size: 15px;
+  color: var(--color-texto);
+  background: var(--color-fondo-card);
+  transition: var(--transicion);
+}
+
+.campo-form:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(26, 122, 74, 0.1);
+}
+
+/* Etiqueta de formulario */
+.etiqueta-form {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+  margin-bottom: 6px;
+}
+
+/* Grupo de campo */
+.grupo-campo {
+  margin-bottom: 16px;
+}
+
+/* Mensajes de estado */
+.mensaje-error {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: var(--radio-pequeño);
+  border: 1px solid #fecaca;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mensaje-exito {
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 12px 16px;
+  border-radius: var(--radio-pequeño);
+  border: 1px solid #bbf7d0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Card genérica */
+.card {
+  background: var(--color-fondo-card);
+  border-radius: var(--radio-medio);
+  padding: 24px;
+  box-shadow: var(--sombra-suave);
+  border: 1px solid var(--color-borde);
+}
+
+/* Spinner de carga */
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px;
+  color: var(--color-texto-suave);
+  font-size: 15px;
+}
+
+.spinner::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-borde);
+  border-top-color: var(--color-primario);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+/* Separador */
+.separador {
+  height: 1px;
+  background: var(--color-borde);
+  margin: 24px 0;
+}
+
+/* Badge de estado */
+.badge-turno {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #dcfce7;
+  color: #16a34a;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge-turno::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #16a34a;
+  border-radius: 50%;
+  animation: pulso 1.5s infinite;
+}
+
+@keyframes pulso {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

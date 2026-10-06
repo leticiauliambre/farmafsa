@@ -1,0 +1,77 @@
+/* ============================================================
+   Archivo: frontend/src/components/BuscadorPorFecha.css
+   ============================================================ */
+
+.buscador {
+  background: var(--color-fondo-card);
+  border-radius: var(--radio-medio);
+  padding: 28px;
+  box-shadow: var(--sombra-suave);
+  border: 1px solid var(--color-borde);
+  margin-top: 32px;
+}
+
+.buscador__titulo {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-texto);
+  margin-bottom: 6px;
+}
+
+.buscador__descripcion {
+  font-size: 14px;
+  color: var(--color-texto-suave);
+  margin-bottom: 20px;
+}
+
+.buscador__form {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.buscador__grupo {
+  flex: 1;
+  min-width: 200px;
+}
+
+.buscador__input {
+  height: 48px;
+  padding: 0 16px;
+}
+
+.buscador__botones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.buscador__botones .btn-primario,
+.buscador__botones .btn-secundario {
+  height: 48px;
+  white-space: nowrap;
+}
+
+.buscador__botones .btn-primario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  .buscador__form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .buscador__botones {
+    flex-direction: column;
+  }
+
+  .buscador__botones .btn-primario,
+  .buscador__botones .btn-secundario {
+    width: 100%;
+    justify-content: center;
+  }
+}

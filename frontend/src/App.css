@@ -1,0 +1,11 @@
+/* ============================================================
+   Archivo: frontend/src/App.css
+   Descripción: Estilos específicos de la aplicación
+   ============================================================ */
+
+/* Limpiar estilos por defecto de Vite */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

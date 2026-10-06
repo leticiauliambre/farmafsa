@@ -1,0 +1,133 @@
+/* ============================================================
+   Archivo: frontend/src/components/FarmaciaCard.css
+   ============================================================ */
+
+.farmacia-card {
+  background: var(--color-fondo-card);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-fuerte);
+  border: 1px solid var(--color-borde);
+  overflow: hidden;
+  transition: var(--transicion);
+  animation: aparecer 0.4s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Foto */
+.farmacia-card__foto {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--color-primario-light);
+}
+
+.farmacia-card__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cuerpo */
+.farmacia-card__cuerpo {
+  padding: 28px;
+}
+
+/* Badge */
+.farmacia-card__badge {
+  margin-bottom: 12px;
+}
+
+/* Nombre */
+.farmacia-card__nombre {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-texto);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+/* Lista de información */
+.farmacia-card__info {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.farmacia-card__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  background: var(--color-fondo);
+  border-radius: var(--radio-pequeño);
+  border: 1px solid var(--color-borde);
+}
+
+.farmacia-card__icono {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.farmacia-card__etiqueta {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-texto-claro);
+  margin-bottom: 3px;
+}
+
+.farmacia-card__valor {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-texto);
+}
+
+.farmacia-card__telefono {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primario);
+  text-decoration: none;
+  transition: var(--transicion);
+}
+
+.farmacia-card__telefono:hover {
+  color: var(--color-primario-dark);
+  text-decoration: underline;
+}
+
+/* Botón de Maps */
+.farmacia-card__boton-maps {
+  width: 100%;
+  justify-content: center;
+  font-size: 16px;
+  padding: 14px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .farmacia-card__cuerpo {
+    padding: 20px;
+  }
+
+  .farmacia-card__nombre {
+    font-size: 22px;
+  }
+}
