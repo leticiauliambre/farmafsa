@@ -1,11 +1,10 @@
 // ============================================================
 // Archivo: frontend/src/components/Header.jsx
-// Descripción: Encabezado de la página pública
-//
-// Muestra el logo, el título del sitio y la fecha actual.
-// Es el componente que aparece en la parte superior de la página.
+// Descripción: Encabezado de la página pública con el logo oficial
 // ============================================================
 
+import { Link } from 'react-router-dom';
+import logoImg from '../assets/logo.png';
 import './Header.css';
 
 function Header() {
@@ -24,19 +23,40 @@ function Header() {
     <header className="header">
       <div className="contenedor">
         <div className="header__contenido">
-          {/* Logo e ícono */}
-          <div className="header__logo">
-            <span className="header__icono">🏥</span>
-            <div>
-              <h1 className="header__titulo">Farmacias de Turno</h1>
-              <p className="header__subtitulo">Formosa Capital</p>
+          {/* Logo oficial (el logo ya incluye el texto 'Farmacia de Turno') */}
+          <Link to="/" className="header__logo-link" title="Farmacia de Turno — Inicio">
+            <div className="header__logo-wrapper">
+              <img
+                src={logoImg}
+                alt="Farmacia de Turno — Formosa Capital"
+                className="header__logo-img"
+              />
+              <span className="header__logo-jurisdiccion">Formosa Capital</span>
             </div>
-          </div>
+          </Link>
 
-          {/* Fecha actual */}
-          <div className="header__fecha">
-            <span className="header__fecha-label">Hoy</span>
-            <span className="header__fecha-valor">{fechaFormateada}</span>
+          {/* Acciones y datos del encabezado */}
+          <div className="header__derecha">
+            {/* Teléfono de emergencias médicas */}
+            <div className="header__emergencia" title="Línea gratuita de emergencias médicas en Formosa">
+              <span className="header__emergencia-icono">🚑</span>
+              <div>
+                <span className="header__emergencia-label">Emergencias</span>
+                <span className="header__emergencia-numero">107</span>
+              </div>
+            </div>
+
+            {/* Fecha actual */}
+            <div className="header__fecha">
+              <span className="header__fecha-label">Hoy</span>
+              <span className="header__fecha-valor">{fechaFormateada}</span>
+            </div>
+
+            {/* Acceso al Panel Admin */}
+            <Link to="/admin" className="header__admin-btn" title="Panel de Administración">
+              <span className="header__admin-icono">🔐</span>
+              <span className="header__admin-texto">Admin</span>
+            </Link>
           </div>
         </div>
       </div>

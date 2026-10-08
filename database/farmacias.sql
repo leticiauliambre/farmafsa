@@ -98,7 +98,7 @@ INSERT INTO turnos (farmacia_id, fecha_inicio, fecha_fin, horario_inicio, horari
 -- Hash generado con password_hash('admin123', PASSWORD_DEFAULT) en PHP
 -- ============================================================
 INSERT INTO administradores (usuario, contrasena) VALUES
-('admin', '$2y$10$YvX7gKk0vAQqVHMk5Tq.Z.fRTm3TJdtBTMgTXXBz3fN3DPa2xuIOu');
+('admin', '$2y$12$aS1Ei.U6Irqp4SnRzI.i4elnyHhE10dXe71BP/4Ln1SuZ9cKoCg/K');
 
 -- ============================================================
 -- FIN DEL ARCHIVO SQL

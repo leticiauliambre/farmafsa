@@ -13,38 +13,42 @@
    VARIABLES DE DISEÑO (colores, tamaños, sombras)
    ============================================================ */
 :root {
-  /* Colores principales - Verde farmacia/salud */
-  --color-primario:      #1a7a4a;
-  --color-primario-dark: #145e38;
-  --color-primario-light: #e8f5ee;
-  --color-secundario:    #2ea865;
-  --color-acento:        #f0a500;
+  /* Colores principales extraídos directamente del logo oficial */
+  --color-primario:       #034f3d; /* Verde bosque profundo del texto 'Farmacia' */
+  --color-primario-dark:  #02382b;
+  --color-primario-light: #eaf6f0; /* Fondo menta suave para badges y chips */
+  --color-secundario:     #259f6c; /* Verde turquesa vibrante del texto 'de Turno' y pulso */
+  --color-secundario-dark:#1d8559;
+  --color-acento:         #34d399; /* Verde esmeralda claro del isotipo */
+  --color-acento-light:   #ecfdf5;
 
   /* Fondos */
-  --color-fondo:         #f2f7f4;
-  --color-fondo-card:    #ffffff;
-  --color-fondo-dark:    #0f2419;
+  --color-fondo:          #f5f8f6;
+  --color-fondo-card:     #ffffff;
+  --color-fondo-dark:     #032e23; /* Verde bosque oscuro armónico para el pie de página */
 
   /* Textos */
-  --color-texto:         #1a2e22;
-  --color-texto-suave:   #5a7263;
-  --color-texto-claro:   #8fa896;
+  --color-texto:          #0e261d;
+  --color-texto-suave:    #3d5e4f;
+  --color-texto-claro:    #719483;
 
   /* Bordes y separadores */
-  --color-borde:         #d4e8da;
+  --color-borde:          #d5e7dc;
+  --color-borde-foco:     #259f6c;
 
-  /* Sombras */
-  --sombra-suave:  0 2px 12px rgba(26, 122, 74, 0.08);
-  --sombra-media:  0 4px 24px rgba(26, 122, 74, 0.15);
-  --sombra-fuerte: 0 8px 40px rgba(26, 122, 74, 0.2);
+  /* Sombras armónicas */
+  --sombra-suave:   0 2px 8px rgba(3, 79, 61, 0.05);
+  --sombra-media:   0 6px 20px rgba(3, 79, 61, 0.08);
+  --sombra-fuerte:  0 12px 36px rgba(3, 79, 61, 0.12);
+  --sombra-card:    0 8px 30px rgba(3, 79, 61, 0.06);
 
   /* Bordes redondeados */
-  --radio-pequeño: 8px;
+  --radio-pequeño: 10px;
   --radio-medio:   16px;
   --radio-grande:  24px;
 
   /* Transiciones */
-  --transicion: all 0.25s ease;
+  --transicion: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ============================================================
@@ -61,7 +65,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--color-fondo);
   color: var(--color-texto);
   font-size: 16px;
@@ -94,17 +98,19 @@ img {
    COMPONENTES REUTILIZABLES
    ============================================================ */
 
-/* Contenedor principal */
+/* Contenedor principal con ancho óptimo para aprovechar la pantalla */
 .contenedor {
-  max-width: 800px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
-/* Botón primario (verde) */
+/* Botón primario (verde farmacia) */
 .btn-primario {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: var(--color-primario);
   color: #ffffff;
@@ -114,36 +120,40 @@ img {
   font-weight: 600;
   transition: var(--transicion);
   border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(13, 110, 66, 0.2);
 }
 
 .btn-primario:hover {
   background: var(--color-primario-dark);
-  transform: translateY(-1px);
-  box-shadow: var(--sombra-media);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(13, 110, 66, 0.3);
 }
 
 .btn-primario:active {
   transform: translateY(0);
 }
 
-/* Botón secundario (contorno) */
+/* Botón secundario */
 .btn-secundario {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  background: transparent;
+  background: #ffffff;
   color: var(--color-primario);
   padding: 12px 24px;
   border-radius: var(--radio-pequeño);
   font-size: 15px;
   font-weight: 600;
-  border: 2px solid var(--color-primario);
+  border: 2px solid var(--color-borde);
   transition: var(--transicion);
+  box-shadow: var(--sombra-suave);
 }
 
 .btn-secundario:hover {
+  border-color: var(--color-primario);
   background: var(--color-primario-light);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* Botón de peligro (rojo) */

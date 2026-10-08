@@ -34,15 +34,20 @@ function BuscadorPorFecha({ onBuscar, cargando }) {
 
   return (
     <div className="buscador">
-      <h2 className="buscador__titulo">¿Querés consultar otra fecha?</h2>
-      <p className="buscador__descripcion">
-        Seleccioná una fecha para ver qué farmacia estaba de turno ese día.
-      </p>
+      <div className="buscador__header">
+        <span className="buscador__icono-titulo">📅</span>
+        <div>
+          <h2 className="buscador__titulo">Consultar otra fecha del cronograma</h2>
+          <p className="buscador__descripcion">
+            Elegí cualquier día del mes para conocer qué farmacia estuvo o estará de turno.
+          </p>
+        </div>
+      </div>
 
       <form className="buscador__form" onSubmit={handleSubmit}>
         <div className="buscador__grupo">
           <label htmlFor="fecha-busqueda" className="etiqueta-form">
-            Seleccioná una fecha
+            Seleccionar fecha
           </label>
           <input
             id="fecha-busqueda"
@@ -50,7 +55,6 @@ function BuscadorPorFecha({ onBuscar, cargando }) {
             className="campo-form buscador__input"
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
-            max={hoy}
           />
         </div>
 

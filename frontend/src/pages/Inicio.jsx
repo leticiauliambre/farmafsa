@@ -73,11 +73,43 @@ function Inicio() {
       <main className="inicio__main">
         <div className="contenedor">
 
-          {/* Título de la sección */}
+          {/* Banner Hero / Presentación */}
+          <section className="inicio__hero">
+            <div className="inicio__hero-contenido">
+              <div className="inicio__hero-badge">
+                <span className="inicio__hero-punto"></span>
+                <span>Servicio a la Comunidad • Formosa Capital</span>
+              </div>
+              <h2 className="inicio__hero-titulo">
+                ¿Qué farmacia está de turno hoy?
+              </h2>
+              <p className="inicio__hero-descripcion">
+                Consultá de manera rápida y sencilla la farmacia de guardia activa las 24 horas,
+                su dirección exacta con mapa interactivo y número de teléfono.
+              </p>
+              <div className="inicio__hero-tags">
+                <span className="inicio__hero-tag">⏰ Guardia 24 horas</span>
+                <span className="inicio__hero-tag">📍 Ubicación en el mapa</span>
+                <span className="inicio__hero-tag">🏛️ Datos oficiales de Formosa</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Título de la sección de resultados */}
           <div className="inicio__seccion-titulo">
-            <h2 className="inicio__titulo-fecha">
-              {fechaConsultada === 'hoy' ? '📋 Farmacia de turno hoy' : `📋 Farmacia de turno el ${formatearFechaConsultada()}`}
-            </h2>
+            <div>
+              <span className="inicio__seccion-sub">Cronograma oficial</span>
+              <h3 className="inicio__titulo-fecha">
+                {fechaConsultada === 'hoy'
+                  ? 'Farmacia de turno hoy'
+                  : `Farmacia de turno: ${formatearFechaConsultada()}`}
+              </h3>
+            </div>
+            {farmacias.length > 0 && !cargando && (
+              <span className="inicio__contador-badge">
+                {farmacias.length === 1 ? '1 farmacia activa' : `${farmacias.length} farmacias activas`}
+              </span>
+            )}
           </div>
 
           {/* Estado: Cargando */}
@@ -108,12 +140,12 @@ function Inicio() {
                 No encontramos información de farmacias de turno para esta fecha.
               </p>
               <p className="inicio__estado-ayuda">
-                Es posible que los datos de ese período aún no hayan sido cargados.
+                Es posible que los turnos correspondientes a este período aún no hayan sido cargados.
               </p>
             </div>
           )}
 
-          {/* Mostrar farmacias encontradas */}
+          {/* Mostrar farmacias encontradas con mapa incrustado */}
           {!cargando && !error && farmacias.length > 0 && (
             <div className="inicio__farmacias">
               {farmacias.map((farmacia) => (
@@ -122,7 +154,7 @@ function Inicio() {
             </div>
           )}
 
-          {/* Buscador por fecha */}
+          {/* Buscador por fecha para ver otros días */}
           <BuscadorPorFecha onBuscar={buscarFarmacias} cargando={cargando} />
 
         </div>

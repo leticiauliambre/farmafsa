@@ -1,21 +1,28 @@
 /* ============================================================
    Archivo: frontend/src/components/FarmaciaCard.css
+   Descripción: Estilos modernos para la tarjeta con mapa incrustado
    ============================================================ */
 
 .farmacia-card {
   background: var(--color-fondo-card);
-  border-radius: var(--radio-grande);
-  box-shadow: var(--sombra-fuerte);
+  border-radius: var(--radio-medio);
+  box-shadow: var(--sombra-card);
   border: 1px solid var(--color-borde);
   overflow: hidden;
   transition: var(--transicion);
   animation: aparecer 0.4s ease;
+  margin-bottom: 24px;
+}
+
+.farmacia-card:hover {
+  box-shadow: var(--sombra-fuerte);
+  border-color: #c0ded0;
 }
 
 @keyframes aparecer {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -23,11 +30,29 @@
   }
 }
 
-/* Foto */
+/* Grid principal: 2 columnas en desktop para aprovechar el ancho */
+.farmacia-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  min-height: 420px;
+}
+
+/* ── Columna 1: Información ── */
+.farmacia-card__info-col {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #ffffff;
+}
+
+/* Foto opcional */
 .farmacia-card__foto {
   width: 100%;
-  height: 200px;
+  height: 180px;
+  border-radius: var(--radio-pequeño);
   overflow: hidden;
+  margin-bottom: 20px;
   background: var(--color-primario-light);
 }
 
@@ -37,49 +62,73 @@
   object-fit: cover;
 }
 
-/* Cuerpo */
-.farmacia-card__cuerpo {
-  padding: 28px;
-}
-
-/* Badge */
-.farmacia-card__badge {
+/* Fila de estado y localidad */
+.farmacia-card__estado-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-bottom: 12px;
 }
 
-/* Nombre */
-.farmacia-card__nombre {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--color-texto);
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-/* Lista de información */
-.farmacia-card__info {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 24px;
-}
-
-.farmacia-card__item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 14px;
+.farmacia-card__localidad {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-texto-suave);
   background: var(--color-fondo);
-  border-radius: var(--radio-pequeño);
+  padding: 4px 10px;
+  border-radius: 100px;
   border: 1px solid var(--color-borde);
 }
 
+/* Nombre de la farmacia */
+.farmacia-card__nombre {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-texto);
+  line-height: 1.2;
+  margin-bottom: 22px;
+  letter-spacing: -0.4px;
+}
+
+/* Lista de detalles */
+.farmacia-card__detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.farmacia-card__detalle-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--color-fondo);
+  border-radius: var(--radio-pequeño);
+  border: 1px solid var(--color-borde);
+  transition: var(--transicion);
+}
+
+.farmacia-card__detalle-item:hover {
+  background: #eef6f1;
+  border-color: #c7e4d3;
+}
+
+.farmacia-card__detalle-item--nota {
+  background: #fdfaf2;
+  border-color: #f7e6c4;
+}
+
 .farmacia-card__icono {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
+}
+
+.farmacia-card__detalle-texto {
+  flex: 1;
+  min-width: 0;
 }
 
 .farmacia-card__etiqueta {
@@ -89,45 +138,144 @@
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: var(--color-texto-claro);
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .farmacia-card__valor {
   display: block;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--color-texto);
+  word-break: break-word;
 }
 
-.farmacia-card__telefono {
-  display: block;
-  font-size: 18px;
-  font-weight: 700;
+/* Enlace a teléfono */
+.farmacia-card__telefono-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 800;
   color: var(--color-primario);
   text-decoration: none;
   transition: var(--transicion);
 }
 
-.farmacia-card__telefono:hover {
+.farmacia-card__telefono-link:hover {
   color: var(--color-primario-dark);
-  text-decoration: underline;
 }
 
-/* Botón de Maps */
-.farmacia-card__boton-maps {
+.farmacia-card__llamar-chip {
+  background: var(--color-primario-light);
+  color: var(--color-primario);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Columna 2: Mapa Incrustado ── */
+.farmacia-card__mapa-col {
+  background: #f8faf9;
+  border-left: 1px solid var(--color-borde);
+  display: flex;
+  flex-direction: column;
+}
+
+.farmacia-card__mapa-header {
+  padding: 16px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-borde);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.farmacia-card__mapa-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.farmacia-card__mapa-pin {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.farmacia-card__mapa-titulo {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-texto);
+  line-height: 1.2;
+}
+
+.farmacia-card__mapa-subtitulo {
+  display: block;
+  font-size: 12px;
+  color: var(--color-texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.farmacia-card__mapa-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.farmacia-card__mapa-marco {
+  flex: 1;
   width: 100%;
-  justify-content: center;
-  font-size: 16px;
-  padding: 14px;
+  min-height: 360px;
+  position: relative;
+  background: #eef2ef;
 }
 
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  .farmacia-card__cuerpo {
-    padding: 20px;
+.farmacia-card__mapa-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ── Adaptación Móvil y Tablet ── */
+@media (max-width: 900px) {
+  .farmacia-card__grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .farmacia-card__mapa-col {
+    border-left: none;
+    border-top: 1px solid var(--color-borde);
+  }
+
+  .farmacia-card__info-col {
+    padding: 24px;
   }
 
   .farmacia-card__nombre {
-    font-size: 22px;
+    font-size: 24px;
+  }
+
+  .farmacia-card__mapa-marco {
+    min-height: 320px;
+    height: 320px;
   }
 }

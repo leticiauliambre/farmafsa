@@ -1,62 +1,91 @@
 /* ============================================================
    Archivo: frontend/src/components/Footer.css
+   Descripción: Estilos del pie de página
    ============================================================ */
 
 .footer {
   background: var(--color-fondo-dark);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 28px 0;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 36px 0;
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer__contenido {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
+  gap: 28px;
   flex-wrap: wrap;
 }
 
-.footer__fuente {
+.footer__bloque {
   display: flex;
   align-items: flex-start;
   gap: 12px;
 }
 
-.footer__fuente-icono {
-  font-size: 20px;
+.footer__icono {
+  font-size: 22px;
+  line-height: 1;
   margin-top: 2px;
 }
 
-.footer__fuente-texto {
-  font-size: 12px;
-  font-weight: 600;
+.footer__etiqueta {
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
-.footer__fuente-link {
-  font-size: 13px;
+.footer__link {
+  font-size: 14px;
+  font-weight: 500;
   color: var(--color-secundario);
   text-decoration: none;
   transition: var(--transicion);
 }
 
-.footer__fuente-link:hover {
+.footer__link:hover {
   color: #ffffff;
   text-decoration: underline;
 }
 
-.footer__derechos {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+.footer__texto {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-@media (max-width: 600px) {
+.footer__resaltado {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.footer__creditos {
+  text-align: right;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer__subcredito {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 3px;
+}
+
+@media (max-width: 860px) {
   .footer__contenido {
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer__creditos {
+    text-align: left;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+    width: 100%;
   }
 }

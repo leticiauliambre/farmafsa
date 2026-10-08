@@ -1,9 +1,7 @@
 // ============================================================
 // Archivo: frontend/src/components/FarmaciaCard.jsx
-// Descripción: Tarjeta que muestra la información de una farmacia
-//
-// Recibe los datos de la farmacia como "props" (propiedades)
-// y los muestra de forma organizada y clara.
+// Descripción: Tarjeta que muestra la información de la farmacia
+//              y su mapa interactivo incrustado directamente en la página.
 // ============================================================
 
 import './FarmaciaCard.css';
@@ -21,7 +19,7 @@ function FarmaciaCard({ farmacia }) {
   // Formatear fecha (ej: "2026-10-01" → "1 de octubre de 2026")
   function formatearFecha(fechaStr) {
     if (!fechaStr) return '';
-    const fecha = new Date(fechaStr + 'T00:00:00'); // Evitar problemas de zona horaria
+    const fecha = new Date(fechaStr + 'T00:00:00'); // Evitar desfase de zona horaria
     return fecha.toLocaleDateString('es-AR', {
       day: 'numeric',
       month: 'long',
@@ -32,102 +30,134 @@ function FarmaciaCard({ farmacia }) {
   const horaInicio = formatearHora(farmacia.horario_inicio);
   const horaFin    = formatearHora(farmacia.horario_fin);
 
+  // Dirección para incrustar en el mapa de Formosa
+  const direccionParaMapa = farmacia.direccion
+    ? `${farmacia.direccion}, Formosa, Argentina`
+    : `${farmacia.nombre}, Formosa, Argentina`;
+
+  // URL del mapa incrustado de Google Maps (sin necesidad de API Key ni librerías adicionales)
+  const urlMapaEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(direccionParaMapa)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+
   return (
-    <div className="farmacia-card">
+    <article className="farmacia-card">
+      <div className="farmacia-card__grid">
 
-      {/* Foto de la farmacia (si existe) */}
-      {farmacia.foto && (
-        <div className="farmacia-card__foto">
-          <img
-            src={`${FOTOS_BASE}${farmacia.foto}`}
-            alt={`Foto de ${farmacia.nombre}`}
-            onError={(e) => { e.target.style.display = 'none'; }} // Ocultar si no carga
-          />
+        {/* Columna 1: Información detallada de la farmacia */}
+        <div className="farmacia-card__info-col">
+          {/* Foto de la farmacia (si existe) */}
+          {farmacia.foto && (
+            <div className="farmacia-card__foto">
+              <img
+                src={`${FOTOS_BASE}${farmacia.foto}`}
+                alt={`Foto de ${farmacia.nombre}`}
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+            </div>
+          )}
+
+          {/* Fila superior: Badge de turno y localidad */}
+          <div className="farmacia-card__estado-fila">
+            <span className="badge-turno">🟢 De turno 24 hs</span>
+            <span className="farmacia-card__localidad">📍 {farmacia.localidad || 'Formosa Capital'}</span>
+          </div>
+
+          {/* Nombre de la farmacia */}
+          <h2 className="farmacia-card__nombre">{farmacia.nombre}</h2>
+
+          {/* Lista de datos destacados */}
+          <div className="farmacia-card__detalles">
+            {/* Dirección */}
+            {farmacia.direccion && (
+              <div className="farmacia-card__detalle-item">
+                <span className="farmacia-card__icono">📍</span>
+                <div className="farmacia-card__detalle-texto">
+                  <span className="farmacia-card__etiqueta">Dirección</span>
+                  <span className="farmacia-card__valor">{farmacia.direccion}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Teléfono */}
+            {farmacia.telefono && (
+              <div className="farmacia-card__detalle-item">
+                <span className="farmacia-card__icono">📞</span>
+                <div className="farmacia-card__detalle-texto">
+                  <span className="farmacia-card__etiqueta">Teléfono</span>
+                  <a href={`tel:${farmacia.telefono}`} className="farmacia-card__telefono-link">
+                    {farmacia.telefono}
+                    <span className="farmacia-card__llamar-chip">Llamar</span>
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {/* Horario */}
+            {(horaInicio || farmacia.notas) && (
+              <div className="farmacia-card__detalle-item">
+                <span className="farmacia-card__icono">⏰</span>
+                <div className="farmacia-card__detalle-texto">
+                  <span className="farmacia-card__etiqueta">Horario de guardia</span>
+                  <span className="farmacia-card__valor">
+                    {horaInicio && horaFin
+                      ? `${horaInicio} a ${horaFin} hs (Turno completo)`
+                      : horaInicio || farmacia.notas || 'Consultar horario'}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Período del turno */}
+            {farmacia.fecha_inicio && farmacia.fecha_fin && (
+              <div className="farmacia-card__detalle-item">
+                <span className="farmacia-card__icono">📅</span>
+                <div className="farmacia-card__detalle-texto">
+                  <span className="farmacia-card__etiqueta">Período de guardia</span>
+                  <span className="farmacia-card__valor">
+                    Del {formatearFecha(farmacia.fecha_inicio)} al {formatearFecha(farmacia.fecha_fin)}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Notas adicionales */}
+            {farmacia.notas && (
+              <div className="farmacia-card__detalle-item farmacia-card__detalle-item--nota">
+                <span className="farmacia-card__icono">ℹ️</span>
+                <div className="farmacia-card__detalle-texto">
+                  <span className="farmacia-card__etiqueta">Notas</span>
+                  <span className="farmacia-card__valor">{farmacia.notas}</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      )}
 
-      {/* Cuerpo de la tarjeta */}
-      <div className="farmacia-card__cuerpo">
+        {/* Columna 2: Mapa incrustado en la propia página */}
+        <div className="farmacia-card__mapa-col">
+          <div className="farmacia-card__mapa-header">
+            <div className="farmacia-card__mapa-header-info">
+              <span className="farmacia-card__mapa-pin">🗺️</span>
+              <div>
+                <span className="farmacia-card__mapa-titulo">Ubicación en el mapa</span>
+                <span className="farmacia-card__mapa-subtitulo">{farmacia.direccion || 'Formosa Capital'}</span>
+              </div>
+            </div>
+            <span className="farmacia-card__mapa-badge">Interactivo</span>
+          </div>
 
-        {/* Badge de turno activo */}
-        <div className="farmacia-card__badge">
-          <span className="badge-turno">De turno</span>
+          <div className="farmacia-card__mapa-marco">
+            <iframe
+              className="farmacia-card__mapa-iframe"
+              title={`Mapa interactivo con la ubicación de ${farmacia.nombre}`}
+              src={urlMapaEmbed}
+              loading="lazy"
+              allowFullScreen
+            />
+          </div>
         </div>
-
-        {/* Nombre de la farmacia */}
-        <h2 className="farmacia-card__nombre">{farmacia.nombre}</h2>
-
-        {/* Información de la farmacia */}
-        <ul className="farmacia-card__info">
-
-          {/* Dirección */}
-          {farmacia.direccion && (
-            <li className="farmacia-card__item">
-              <span className="farmacia-card__icono">📍</span>
-              <div>
-                <span className="farmacia-card__etiqueta">Dirección</span>
-                <span className="farmacia-card__valor">{farmacia.direccion}</span>
-              </div>
-            </li>
-          )}
-
-          {/* Teléfono */}
-          {farmacia.telefono && (
-            <li className="farmacia-card__item">
-              <span className="farmacia-card__icono">📞</span>
-              <div>
-                <span className="farmacia-card__etiqueta">Teléfono</span>
-                <a href={`tel:${farmacia.telefono}`} className="farmacia-card__telefono">
-                  {farmacia.telefono}
-                </a>
-              </div>
-            </li>
-          )}
-
-          {/* Horario */}
-          {(horaInicio || farmacia.notas) && (
-            <li className="farmacia-card__item">
-              <span className="farmacia-card__icono">🕐</span>
-              <div>
-                <span className="farmacia-card__etiqueta">Horario</span>
-                <span className="farmacia-card__valor">
-                  {horaInicio && horaFin
-                    ? `${horaInicio} a ${horaFin}`
-                    : horaInicio || farmacia.notas || 'Consultar'}
-                </span>
-              </div>
-            </li>
-          )}
-
-          {/* Período del turno */}
-          {farmacia.fecha_inicio && farmacia.fecha_fin && (
-            <li className="farmacia-card__item">
-              <span className="farmacia-card__icono">📅</span>
-              <div>
-                <span className="farmacia-card__etiqueta">Período de turno</span>
-                <span className="farmacia-card__valor">
-                  Del {formatearFecha(farmacia.fecha_inicio)} al {formatearFecha(farmacia.fecha_fin)}
-                </span>
-              </div>
-            </li>
-          )}
-
-        </ul>
-
-        {/* Botón de Google Maps */}
-        {farmacia.maps_url && (
-          <a
-            href={farmacia.maps_url}
-            target="_blank"
-            rel="noreferrer"
-            className="farmacia-card__boton-maps btn-primario"
-          >
-            🗺️ Ver en Google Maps
-          </a>
-        )}
 
       </div>
-    </div>
+    </article>
   );
 }
 

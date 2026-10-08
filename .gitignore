@@ -1,0 +1,61 @@
+# ============================================================
+# .gitignore — Proyecto Farmacias de Turno
+# ============================================================
+
+# 1. Reglas e instrucciones del asistente AI (uso local)
+AGENTS.md
+.agents/
+.gemini/
+
+# 2. Archivos del sistema operativo
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 3. Dependencias y compilación de Node.js / React (Frontend)
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Logs de gestores de paquetes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 4. Archivos de entorno y credenciales (seguridad)
+.env
+.env.local
+.env.*.local
+
+# 5. Servidor, PHP y subidas dinámicas (Backend)
+logs/
+*.log
+error_log
+
+# Fotos subidas por usuarios/administrador (se preserva la estructura con .gitkeep)
+backend/uploads/fotos/*
+!backend/uploads/fotos/.gitkeep
+
+# 6. Editores de código e IDEs (configuración personal)
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swo
+*.swp
+*~
